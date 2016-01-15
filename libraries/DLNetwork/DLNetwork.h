@@ -10,6 +10,8 @@ enum network_interface
 };
 typedef enum network_interface NETWORK_INTERFACE;
 
+typedef void (*NETWORK_HTTP_REQ_COMPLETE)(bool);
+
 /*
  * NetworkInterface is a pure abstract class.
  * Each supported interface shall inherit from this base class
@@ -19,8 +21,10 @@ class NetworkInterface
 {
     public: 
         virtual bool tryConnection(uint8_t timeoutSeconds) = 0;
-        virtual bool sendHTTPRequest(const char * const url, const char * request, char * response, bool useHTTPS=false) = 0;
+        virtual void sendHTTPRequest(const char * const url, const char * request, char * response, NETWORK_HTTP_REQ_COMPLETE on_complete_fn, bool useHTTPS=false) = 0;
         virtual bool isConnected(void) = 0;
+        virtual void tick() = 0;
+        virtual const char * last_error() = 0;
 };
 
 NetworkInterface * Network_GetNetwork(NETWORK_INTERFACE interface);

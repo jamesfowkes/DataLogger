@@ -21,6 +21,8 @@
 #include <LGPRS.h>
 #include <LGPRSClient.h>
 
+#include "DLUtility.h"
+
 #include "DLNetwork.h"
 #include "DLNetwork.linkitone.h"
 
@@ -43,14 +45,16 @@ bool LinkItOneWiFi::tryConnection(uint8_t timeoutSeconds)
     return false;
 }
 
-bool LinkItOneWiFi::sendHTTPRequest(const char * const url, const char * request, char * response, bool useHTTPS)
+void LinkItOneWiFi::sendHTTPRequest(const char * const url, const char * request, char * response, NETWORK_HTTP_REQ_COMPLETE on_complete_fn, bool useHTTPS)
 {
 	// WIFI FUNCTIONALITY NOT YET IMPLEMENTED
 	(void)url;
 	(void)request;
 	(void)response;
 	(void)useHTTPS;
-	return false;
+	(void)on_complete_fn;
 }
 
 bool LinkItOneWiFi::isConnected(void) { return false; }
+void LinkItOneWiFi::tick() {}
+const char * LinkItOneWiFi::last_error() { return ""; }

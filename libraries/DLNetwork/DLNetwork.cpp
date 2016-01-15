@@ -18,9 +18,12 @@
  * Local Application Includes
  */
 
+#include "DLUtility.h"
+
 #include "DLSettings.Global.h"
 #include "DLNetwork.h"
 #include "DLNetwork.linkitone.h"
+
 /*
  * Public Functions 
  */
