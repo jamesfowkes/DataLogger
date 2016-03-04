@@ -17,6 +17,8 @@
 #include <stdio.h>
 #endif
 
+#include <time.h>
+
 #include "DLUtility.h"
 
 void CSV_writeTimestampToBuffer(TM * time, char * buffer)

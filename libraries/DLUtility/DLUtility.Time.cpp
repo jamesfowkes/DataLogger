@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdint.h>
+#include <time.h>
 
 #include "DLUtility.Time.h"
 #include "DLUtility.HelperMacros.h"
@@ -47,7 +48,7 @@ uint16_t calculate_days_into_year(const TM * tm)
 	return days;
 }
 
-void unix_seconds_to_time(UNIX_TIMESTAMP sec, TM * tm)
+void unix_seconds_to_time(time_t sec, TM * tm)
 {
 	uint16_t day;
 	GREGORIAN_YEAR year;
@@ -96,9 +97,9 @@ void unix_seconds_to_time(UNIX_TIMESTAMP sec, TM * tm)
 	tm->tm_mday = day + 1; // 1..31
 }
 
-UNIX_TIMESTAMP time_to_unix_seconds(TM const * const tm)
+time_t time_to_unix_seconds(TM const * const tm)
 {
-	UNIX_TIMESTAMP secs = 0;
+	time_t secs = 0;
 	
 	if (tm->tm_year < FIRST_UNIX_YEAR_C) { return 0; }
 	
