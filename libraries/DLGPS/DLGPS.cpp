@@ -14,6 +14,7 @@
 
 #include <stdint.h>
 #include <string.h>
+#include <time.h>
 
 /*
  * Local Application Includes

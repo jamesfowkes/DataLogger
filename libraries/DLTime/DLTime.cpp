@@ -13,6 +13,7 @@
  */
 
 #include <Arduino.h>
+#include <time.h>
 
 /*
  * Local Application Includes

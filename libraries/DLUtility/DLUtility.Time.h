@@ -32,11 +32,6 @@ enum month_enum
 	DECEMBER
 };
 
-#ifndef UNIX_TIME_TYPE
-// Use a 64-bit time to be safe, unless user has specified something different
-#define UNIX_TIME_TYPE uint64_t
-#endif
-
 // Convert between C years and gregorian years
 #define GREGORIAN_TO_C_YEAR(year) (year - FIRST_C_YEAR_GR) 
 #define C_TO_GREGORIAN_YEAR(year) (year + FIRST_C_YEAR_GR) 
@@ -79,21 +74,21 @@ enum month_enum
 #define DAYS_HRS_MINS_SECS_TO_SECS(d, h, m, s) (d * S_PER_DAY) + HRS_MINS_SECS_TO_SECS(h, m, s)
 
 /* This struct taken from C library time.h */
-struct _tm
+/*struct _tm
 {
-	int tm_sec;    /* seconds after the minute (0 to 61) */
-	int tm_min;    /* minutes after the hour (0 to 59) */
-	int tm_hour;   /* hours since midnight (0 to 23) */
-	int tm_mday;   /* day of the month (1 to 31) */
-	int tm_mon;    /* months since January (0 to 11) */
-	int tm_year;   /* years since 1900 */
-	int tm_wday;   /* days since Sunday (0 to 6 Sunday=0) */
-	int tm_yday;   /* days since January 1 (0 to 365) */
-	int tm_isdst;  /* Daylight Savings Time */
-};
-typedef struct _tm TM;
+	int tm_sec;    // seconds after the minute (0 to 61)
+	int tm_min;    // minutes after the hour (0 to 59)
+	int tm_hour;   // hours since midnight (0 to 23)
+	int tm_mday;   // day of the month (1 to 31)
+	int tm_mon;    // months since January (0 to 11)
+	int tm_year;   // years since 1900
+	int tm_wday;   // days since Sunday (0 to 6 Sunday=0)
+	int tm_yday;   // days since January 1 (0 to 365)
+	int tm_isdst;  // Daylight Savings Time
+};*/
 
-typedef UNIX_TIME_TYPE UNIX_TIMESTAMP;
+typedef struct tm TM;
+
 typedef int C_STRUCT_YEAR;
 typedef int GREGORIAN_YEAR;
 
@@ -105,8 +100,8 @@ bool is_leap_year(GREGORIAN_YEAR year);
 uint16_t days_in_month(uint8_t month, bool is_leap_year);
 uint16_t calculate_days_into_year(const TM * tm);
 
-void unix_seconds_to_time(UNIX_TIMESTAMP sec, TM * tm);
-UNIX_TIMESTAMP time_to_unix_seconds(TM const * const tm);
+void unix_seconds_to_time(time_t sec, TM * tm);
+time_t time_to_unix_seconds(TM const * const tm);
 
 void time_increment_seconds(TM * tm);
 

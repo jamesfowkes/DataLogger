@@ -12,7 +12,10 @@
 /*
  * Standard library includes
  */
+
 #include <stdint.h>
+#include <time.h>
+
 #include "DLUtility.h"
 
 // Converts a decimal to BCD (binary coded decimal)
