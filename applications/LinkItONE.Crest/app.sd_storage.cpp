@@ -19,7 +19,8 @@
  */
 
 #include <stdint.h>
-
+#include <time.h>
+ 
 /*
  * Datalogger Library Includes
  */

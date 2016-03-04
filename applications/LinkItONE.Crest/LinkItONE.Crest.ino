@@ -20,6 +20,7 @@
  */
 
 #include <stdint.h>
+#include <time.h>
 
 /*
  * Arduino Library Includes
@@ -439,7 +440,10 @@ static void on_serial_request_received(int request_number)
         break;
     }
 
-    APP_SerialRequestData_FormatArray(request_data, n_fields, s_request_data_buffer, 128);
+    TM platform_time;
+    Time_GetTime(&platform_time, TIME_PLATFORM);
+
+    APP_SerialRequestData_FormatArray(request_data, n_fields, s_request_data_buffer, 128, &platform_time);
     Serial1.print(s_request_data_buffer);
 }
 

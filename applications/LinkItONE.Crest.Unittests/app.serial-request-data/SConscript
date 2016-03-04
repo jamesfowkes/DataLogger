@@ -1,6 +1,7 @@
 Import('cpppath', 'cppflags')
 
 cpppath += ["../../../Libraries/DLUtility"]
+cppflags += ["-std=c++11"]
 
 objects = [
     Object("app.serial-request-data.test.cpp", CPPFLAGS=cppflags, CPPPATH=cpppath),
