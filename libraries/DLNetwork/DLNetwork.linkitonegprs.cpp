@@ -18,6 +18,7 @@
  * LinkIt One Includes
  */
 
+#include <LTask.h>
 #include <LGPRS.h>
 #include <LGPRSClient.h>
 
@@ -27,6 +28,18 @@
 /*
  * Private Variables
  */
+
+static int s_failed_connection_count = 0;
+
+/*
+ * Private Functions
+ */
+
+boolean CallReset(void * userdata) 
+{ 
+    vm_reboot_normal_start(); 
+    return true; 
+}
 
  /*
  * Public Functions 
@@ -72,6 +85,13 @@ bool LinkItOneGPRS::connect(char const * const url)
     {
         if (!m_connected) { Serial.println("LinkItOneGPRS::connect: No GRPS connection!"); }
         if (!m_client)  { Serial.println("LinkItOneGPRS::connect: No LGPRSClient!"); }
+
+        s_failed_connection_count++;
+        if (s_failed_connection_count == 6)
+        {
+            Serial.println("LinkItOneGPRS::connect: Restarting due to failed connection limit!");
+            LTask.remoteCall(CallReset, NULL); 
+        }
     }
     
     return success;
